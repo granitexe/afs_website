@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aquaristikfreunde Steiermark</title>
+  <style>
+    /* Reset & Basis */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #004d40; background: #e0f7fa; display: flex; flex-direction: column; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Kopfzeile & Navigation */
+    header { background: #006064; color: #fff; padding: 1rem 2rem; position: relative; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; }
+    nav ul { list-style: none; display: flex; gap: 1rem; }
+    nav a { color: #fff; font-weight: 500; }
+
+    /* Hero mit Hintergrundbild */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 8rem 1rem;
+      background: url('landing.jpg') center/cover no-repeat;
+      color: #fff;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-title {
+      font-size: 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease 0.5s forwards;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Abschnitte */
+    .section { padding: 2rem 1rem; }
+    #stats-section, #cta-section, #events-section { background: #ffffff; margin: 1rem 0; border-radius: 8px; }
+
+    /* Vereins-Statistiken */
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .stat {
+      background: #e0f2f1;
+      width: 150px;                /* Einheitliche Breite */
+      padding: 1.25rem 1rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;      /* Zentrierte Inhalte */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .stat:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .stat-number {
+      font-size: 2.25rem;
+      font-weight: bold;
+      color: #006064;
+      margin-bottom: 0.25rem;
+    }
+    .stat div:last-child {
+      font-size: 0.875rem;
+      color: #004d40;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    /* Call-to-Action */
+    .btn { display: inline-block; margin: 1rem auto; padding: 0.75rem 1.5rem; background: #00838f; color: #fff; border: none; border-radius: 2rem; cursor: pointer; transition: transform 0.3s; }
+    .btn:hover { transform: scale(1.05); }
+
+    /* Kommende Veranstaltungen */
+    #events-list { list-style: none; max-width: 600px; margin: 0 auto; }
+    #events-list li { margin: 0.5rem 0; padding: 0.5rem; border-bottom: 1px solid #ccc; cursor: pointer; }
+    .event-details { display: none; margin-top: 0.5rem; color: #333; }
+
+    /* Fußzeile */
+    footer { text-align: center; padding: 1rem; background: #006064; color: #fff; margin-top: auto; }
+
+    /* Animationen */
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Responsiv */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav ul { flex-direction: column; background: #004d40; position: absolute; top: 100%; left: 0; width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      nav ul.open { max-height: 200px; }
+      nav ul li { padding: 0.5rem 1rem; }
+      /* Kartenbreite für schmale Geräte anpassen */
+      .stat { width: 45%; max-width: 160px; margin: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <h1>Aquaristik Freunde Steiermark</h1>
+      <div class="menu-toggle" id="menuToggle">☰</div>
+      <nav>
+        <ul id="navList">
+          <li><a href="#hero">Startseite</a></li>
+          <li><a href="#stats-section">Vereins-Statistiken</a></li>
+          <li><a href="#events-section">Veranstaltungen</a></li>
+          <li><a href="#register">Registrieren</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero mit Hintergrund -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <h2 class="hero-title">Tauche ein in die Welt der Aquaristik</h2>
+        <p class="hero-subtitle">Tritt gleichgesinnten Enthusiasten bei, um aquatisches Leben, Pflegetipps und beeindruckende Unterwasserlandschaften zu entdecken.</p>
+      </div>
+    </section>
+
+    <!-- Vereins-Statistiken -->
+    <section id="stats-section" class="section">
+      <h3 style="text-align:center;">Vereins-Highlights</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <div id="member-count" class="stat-number">0</div>
+          <div>Mitglieder</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="events-count">0</div>
+          <div>Vorträge</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="species-count">0</div>
+          <div>Arten in Zucht</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="years-active">0</div>
+          <div>Börsen<br>veranstaltet</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call-to-Action -->
+    <section id="cta-section" class="section" style="text-align:center;">
+      <button class="btn" id="register">Mitglied werden</button>
+    </section>
+
+    <!-- Kommende Veranstaltungen -->
+    <section id="events-section" class="section">
+      <h3 style="text-align:center;">Kommende Veranstaltungen</h3>
+      <ul id="events-list">
+        <li data-details="Nimm an unserem monatlichen Treffen im Aquatic Center teil. Bringe deine Fragen mit und präsentiere deine Aquarien!">15. Juni 2025 – Monatliches Treffen im Aquatic Center</li>
+        <li data-details="Praktischer Korallen-Workshop mit Identifikation und Ablegungstechniken. Materialien werden gestellt.">10. Juli 2025 – Korallen-Workshop</li>
+        <li data-details="Erfahre mehr über fortgeschrittene Fischzuchttechniken, inkl. Auslöser und Einrichtung spezieller Aquarien.">20. August 2025 – Fischzucht-Techniken</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Aquaristikfreunde Steiermark. Alle Rechte vorbehalten.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobil-Navigation umschalten
+      const menuToggle = document.getElementById('menuToggle');
+      const navList = document.getElementById('navList');
+      menuToggle.addEventListener('click', () => navList.classList.toggle('open'));
+
+      // Vereins-Statistiken – ggf. dynamisch ersetzen
+      const stats = {
+        members: 128,
+        eventsHosted: 42,
+        species: 58,
+      };
+      document.getElementById('member-count').textContent = stats.members;
+      document.getElementById('events-count').textContent = stats.eventsHosted;
+      document.getElementById('species-count').textContent = stats.species;
+      // Jahre aktiv berechnen
+      const foundingYear = 2010;
+      const currentYear = new Date().getFullYear();
+      document.getElementById('years-active').textContent = currentYear - foundingYear;
+
+      // Jahr in Fußzeile aktualisieren
+      document.getElementById('year').textContent = currentYear;
+
+      // Details der Veranstaltungen ein- und ausklappen
+      document.querySelectorAll('#events-list li').forEach(item => {
+        item.addEventListener('click', () => {
+          let details = item.querySelector('.event-details');
+          if (!details) {
+            details = document.createElement('div');
+            details.className = 'event-details';
+            details.textContent = item.getAttribute('data-details');
+            item.appendChild(details});
